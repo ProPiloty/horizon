@@ -1,11 +1,14 @@
 import React from 'react';
+import 'reset-css';
 import './App.css';
+import {HashRouter as Router} from 'react-router-dom';
+import router from './router';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+    <Router>
+      {router}
+    </Router>
   );
 }
 

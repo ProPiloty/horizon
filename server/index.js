@@ -23,3 +23,6 @@ massive(CONNECTION_STRING).then(database => {
         console.log(`Server Listening On Port: ${SERVER_PORT}`)
     })
 });
+
+// ENDPOINTS
+app.post('/auth/register'); // REGISTER NEW USER
