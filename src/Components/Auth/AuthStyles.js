@@ -51,6 +51,7 @@ export const AuthFormInputTitle = styled.span.attrs(() => ({
 export const AuthFormInput = styled.input.attrs(({field, fieldType}) => ({
     type: fieldType,
     placeholder: field,
+    name: field,
 }))`
     font-size: 20px;
     width: 50%;
@@ -63,6 +64,17 @@ export const AuthFormInput = styled.input.attrs(({field, fieldType}) => ({
 export const AuthFormButton = styled.button.attrs({
 
 })`
+    margin-top: 15px;
+    margin-bottom: 50px;
+    width: 50%;
+    height: 40px;
+    background: #363635;
+    color: #5A93C5;
+    border: none;
+    font-size: 20px;
+`
+
+export const AuthFormGoBack = styled.p `
     margin-top: 15px;
     margin-bottom: 50px;
     width: 50%;

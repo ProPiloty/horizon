@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
+const auth_ctrl = require('./controllers/auth_controller')
 
 const app = express();
 const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env;
@@ -25,4 +26,6 @@ massive(CONNECTION_STRING).then(database => {
 });
 
 // ENDPOINTS
-app.post('/auth/register'); // REGISTER NEW USER
+app.post('/auth/check', auth_ctrl.checkEmail); // CHECKS EXISTANCE OF USER ACCOUNT
+app.post('/auth/login', auth_ctrl.login); // LOGS IN USER
+app.post('/auth/register', auth_ctrl.register); // REGISTERS A NEW USER
