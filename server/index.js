@@ -25,7 +25,11 @@ massive(CONNECTION_STRING).then(database => {
     })
 });
 
-// ENDPOINTS
-app.post('/auth/check', auth_ctrl.checkEmail); // CHECKS EXISTANCE OF USER ACCOUNT
+// ENDPOINTS - AUTH CONTROLLER
+app.post('/auth/checkemail', auth_ctrl.checkEmail); // CHECKS EXISTANCE OF USER ACCOUNT
+app.get('/auth/checklogin', auth_ctrl.getUser); // CHECKS IF USER IS LOGGED IN
 app.post('/auth/login', auth_ctrl.login); // LOGS IN USER
 app.post('/auth/register', auth_ctrl.register); // REGISTERS A NEW USER
+
+// ENDPOINTS - FLIGHT CONTROLLER
+app.get('/api/flights'); // GETS ALL SCHEDULED FLIGHTS

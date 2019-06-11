@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import axios from 'axios';
 
 // USERDASH ROUTES
 import userdash_router from '../../utils/dashboard_router';
@@ -13,6 +15,16 @@ import {
 } from './DashboardStyles';
 
 class UserDash extends Component {
+
+    componentDidMount(){
+        axios.get('/auth/checklogin')
+            .then()
+            .catch((err) => {
+                alert('Unauthorized access. You must be logged in to have access to your dashboard. You will be redirected to log in.');
+                this.props.history.push('/auth');
+            })
+    }
+
     render(){
         return (
             <UserDashParent>
@@ -25,4 +37,8 @@ class UserDash extends Component {
     }
 }
 
-export default UserDash;
+function mapStateToProps(reduxState) {
+    return reduxState;
+}
+
+export default connect(mapStateToProps)(UserDash);

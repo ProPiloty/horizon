@@ -40,12 +40,31 @@ module.exports = {
         const db = req.app.get('db');
         const {session} = req;
         const userFound = await db.auth.check_user_email({email});
+        const {id} = userFound[0];
+        const userRoles = await db.auth.get_user_roles({id})
+        const {
+            fboadmin,
+            flmadmin,
+            student,
+            passenger,
+            csr,
+            lst,
+            flight_crew,
+            flight_instructor } = userRoles[0];
         if (!userFound[0]) return res.status(401).send('User not found');
         const authenticated = bcrypt.compareSync(password, userFound[0].password);
         if (authenticated) {
             session.user = {
-                id: userFound[0].login_id,
-                username: userFound[0].firstname
+                id: userFound[0].id,
+                username: userFound[0].firstname,
+                fboadmin,
+                flmadmin,
+                student,
+                passenger,
+                csr,
+                lst,
+                flight_crew,
+                flight_instructor
             };
             return res.status(200).send(session.user);
         } else {

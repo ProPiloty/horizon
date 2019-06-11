@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
-import DashboardTopNav from '../DashboardTopNav/DashboardTopNav';
+import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
+
+// STYLED COMPONENTS
+import {} from './DashboardHomeStyles';
 
 class DashboardHome extends Component {
     render(){
         return (
             <div>
-                <DashboardTopNav page='0' />
-                <h1>Dashboard Home</h1>
+                <DashboardTitle role='home' />
             </div>
         )
     }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
-import DashboardTopNav from '../DashboardTopNav/DashboardTopNav';
+import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
+import ScheduledFlights from '../UniversalComponents/ScheduledFlights/ScheduledFlights';
 
 // STYLED COMPONENTS
 import {} from './LSTStyles';
@@ -10,8 +11,8 @@ class LST extends Component {
     render(){
         return (
             <div>
-                <DashboardTopNav page='3' />
-                <h1>LST Sub-Dashboard</h1>
+                <h1>LST</h1>
+                <ScheduledFlights />
             </div>
         )
     }

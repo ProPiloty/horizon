@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
-import DashboardTopNav from '../DashboardTopNav/DashboardTopNav';
+import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
+import ScheduledFlights from '../UniversalComponents/ScheduledFlights/ScheduledFlights';
+import PastFlights from '../UniversalComponents/PastFlights/PastFlights';
 
 // STYLED COMPONENTS
 import {} from './FBOAdminStyles';
@@ -10,8 +12,9 @@ class FBOAdmin extends Component {
     render(){
         return (
             <div>
-                <DashboardTopNav page='1' />
-                <h1>FBO Admin</h1>
+                <DashboardTitle role='fboadmin' />
+                <ScheduledFlights />
+                <PastFlights />
             </div>
         )
     }

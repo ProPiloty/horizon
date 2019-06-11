@@ -17,13 +17,13 @@ import Student from '../Components/Dashboard/Components/Student/Student';
 export default (
     <Switch>
         <Route exact path='/dashboard' component={DashboardHome} />
-        <Route path='/dashboard/csr' component={CSR} />
         <Route path='/dashboard/fboadmin' component={FBOAdmin} />
-        <Route path='/dashboard/flightcrew' component={FlightCrew} />
-        <Route path='/dashboard/flmadmin' component={FLMAdmin} />
-        <Route path='/dashboard/instructor' component={Instructor} />
+        <Route path='/dashboard/csr' component={CSR} />
         <Route path='/dashboard/lst' component={LST} />
-        <Route path='/dashboard/passenger' component={Passenger} />
+        <Route path='/dashboard/flmadmin' component={FLMAdmin} />
+        <Route path='/dashboard/flightcrew' component={FlightCrew} />
+        <Route path='/dashboard/instructor' component={Instructor} />
         <Route path='/dashboard/student' component={Student} />
+        <Route path='/dashboard/passenger' component={Passenger} />
     </Switch>
 )

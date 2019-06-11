@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
-import DashboardTopNav from '../DashboardTopNav/DashboardTopNav';
+import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
+import ScheduledFlights from '../UniversalComponents/ScheduledFlights/ScheduledFlights';
 
 // STYLED COMPONENTS
 import {} from './FLMAdminStyles';
@@ -10,8 +11,8 @@ class FLMAdmin extends Component {
     render(){
         return (
             <div>
-                <DashboardTopNav page='2' />
-                <h1>FLM Admin Sub-Dashboard</h1>
+                <DashboardTitle role='flmadmin' />
+                <ScheduledFlights role='flmadmin' />
             </div>
         )
     }

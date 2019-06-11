@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
+
+// REDUCER FUNCTIONS
+import {updateUser} from '../../redux/reducers/userReducer';
 
 // STYLED COMPONENTS
 import {
     AuthContainer,
     AuthForm,
     AuthMessage,
-    AuthFormInputContainer,
     AuthFormInputTitle,
     AuthFormInput,
     AuthFormButton,
-    AuthFormGoBack
 } from './AuthStyles';
 
 // AUTH COMPONENT
@@ -39,13 +41,11 @@ class Auth extends Component {
         const body = {email};
 
         // CHECKS EXISTANCE OF USERS ACCOUNT
-        axios.post('/auth/check', body)
+        axios.post('/auth/checkemail', body)
             .then((res) => {
-                console.log(res);
                 this.setState({step: 0}) // STEP 0 ON STATE = PASSWORD INPUT PAGE
             })
             .catch((err) => {
-                console.log(err);
                 this.setState({step: 1}) // STEP 1 ON STATE = USER REGISTER PAGE
             });
     }
@@ -61,8 +61,8 @@ class Auth extends Component {
         // SENDS INFORMATION FOR LOGIN
         axios.post('/auth/login', body)
             .then(res => {
-                console.log(res);
-                this.props.history.push('/dashboard')
+                this.props.updateUser(res.data);
+                this.props.history.push('/dashboard');
             })
             .catch(err => {
                 console.log(err);
@@ -80,12 +80,11 @@ class Auth extends Component {
         e.preventDefault();
 
         const {email, password, firstname, lastname, fboadmin, flmadmin, student, passenger} = this.state;
-
         const body = {email, password, firstname, lastname, fboadmin, flmadmin, student, passenger};
 
         axios.post('/auth/register', body)
             .then(res => {
-                console.log(res);
+                this.props.history.push('/dashboard');
             })
             .catch(err => {
                 console.log(err);
@@ -112,14 +111,13 @@ class Auth extends Component {
             case 0:
                 return (
                     <AuthForm onSubmit={this.handleLoginSubmit}>
-                        <AuthMessage>Welcome back [email]!</AuthMessage>
-                        <AuthFormInputContainer>
-                            <AuthFormInput
-                                field='password'
-                                fieldType='password'
-                                value={this.state.password}
-                                onChange={this.handleTextInput} />
-                        </AuthFormInputContainer>
+                        <AuthMessage>Welcome back {this.state.email}!</AuthMessage>
+                        <AuthFormInputTitle>Please enter your password:</AuthFormInputTitle>
+                        <AuthFormInput
+                            field='password'
+                            fieldType='password'
+                            value={this.state.password}
+                            onChange={this.handleTextInput} />
                         <AuthFormButton>Log In</AuthFormButton>
                     </AuthForm>
                 )
@@ -206,4 +204,8 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+function mapStateToProps(reduxState) {
+    return reduxState;
+}
+
+export default connect(mapStateToProps, {updateUser})(Auth);
