@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 
 // REDUCER FUNCTIONS
-import {updateFlights} from '../../../../../redux/reducers/flightReducer';
+import {updateScheduledFlights} from '../../../../../redux/reducers/flightReducer';
 
 // STYLED COMPONENTS
 import {} from './PastFlightsStyles';
@@ -25,4 +25,4 @@ function mapStateToProps(reduxState) {
     return reduxState;
 }
 
-export default connect(mapStateToProps, {updateFlights})(PastFlights);
+export default connect(mapStateToProps, {updateScheduledFlights})(PastFlights);

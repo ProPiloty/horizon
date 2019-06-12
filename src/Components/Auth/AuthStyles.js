@@ -50,7 +50,6 @@ export const AuthFormInputTitle = styled.span.attrs(() => ({
 
 export const AuthFormInput = styled.input.attrs(({field, fieldType}) => ({
     type: fieldType,
-    placeholder: field,
     name: field,
 }))`
     font-size: 20px;

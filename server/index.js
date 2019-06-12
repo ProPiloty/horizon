@@ -2,7 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const massive = require('massive');
-const auth_ctrl = require('./controllers/auth_controller')
+
+// CONTROLLERS
+const auth_ctrl = require('./controllers/auth_controller');
+const flt_ctrl = require('./controllers/flight_controller');
 
 const app = express();
 const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env;
@@ -13,7 +16,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 1000 * 60 * 60
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
@@ -32,4 +35,4 @@ app.post('/auth/login', auth_ctrl.login); // LOGS IN USER
 app.post('/auth/register', auth_ctrl.register); // REGISTERS A NEW USER
 
 // ENDPOINTS - FLIGHT CONTROLLER
-app.get('/api/flights'); // GETS ALL SCHEDULED FLIGHTS
+app.get('/api/flights', flt_ctrl.getFlights); // GETS ALL SCHEDULED FLIGHTS

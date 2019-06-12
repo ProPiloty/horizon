@@ -10,10 +10,13 @@ import {} from './FBOAdminStyles';
 
 class FBOAdmin extends Component {
     render(){
+        const props = {
+            page: 'FBO Admin',
+        }
         return (
             <div>
-                <DashboardTitle role='fboadmin' />
-                <ScheduledFlights />
+                <DashboardTitle />
+                <ScheduledFlights myProps={props} />
                 <PastFlights />
             </div>
         )

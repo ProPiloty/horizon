@@ -9,9 +9,12 @@ import {} from './LSTStyles';
 
 class LST extends Component {
     render(){
+        const componentProps = {
+            page: ''
+        };
         return (
             <div>
-                <h1>LST</h1>
+                <DashboardTitle randomProps={componentProps} />
                 <ScheduledFlights />
             </div>
         )
