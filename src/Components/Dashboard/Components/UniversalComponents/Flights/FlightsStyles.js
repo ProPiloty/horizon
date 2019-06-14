@@ -21,7 +21,7 @@ export const Title = styled.h1 `
     font-size: 20px;
 `
 
-export const BoxContainer = styled.div `
+export const FlightList = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,7 +30,7 @@ export const BoxContainer = styled.div `
     width: 95%;
 `
 
-export const Box = styled.div `
+export const FlightBox = styled.div `
     background: slategray;
     margin-bottom: 1vh;
     width: 100%;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
 import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
-import ScheduledFlights from '../UniversalComponents/ScheduledFlights/ScheduledFlights';
+import Flights from '../UniversalComponents/Flights/Flights';
 
 // STYLED COMPONENTS
 import {} from './StudentStyles';
@@ -12,7 +12,7 @@ class Student extends Component {
         return (
             <div>
                 <h1>Student Dashboard</h1>
-                <ScheduledFlights role='student' />
+                <Flights role='student' />
             </div>
         )
     }

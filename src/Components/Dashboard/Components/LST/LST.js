@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 // SIBLING COMPONENTS
 import DashboardTitle from '../UniversalComponents/DashboardTitle/DashboardTitle';
-import ScheduledFlights from '../UniversalComponents/ScheduledFlights/ScheduledFlights';
+import Flights from '../UniversalComponents/Flights/Flights';
 
 // STYLED COMPONENTS
 import {} from './LSTStyles';
@@ -15,7 +15,7 @@ class LST extends Component {
         return (
             <div>
                 <DashboardTitle randomProps={componentProps} />
-                <ScheduledFlights />
+                <Flights />
             </div>
         )
     }
