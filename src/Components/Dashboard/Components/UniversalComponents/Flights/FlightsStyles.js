@@ -26,6 +26,7 @@ export const FlightList = styled.div `
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
     color: white;
     width: 95%;
 `

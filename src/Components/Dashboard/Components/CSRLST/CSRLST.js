@@ -7,17 +7,17 @@ import Flights from '../UniversalComponents/Flights/Flights';
 // STYLED COMPONENTS
 import {
     DashColumn
-} from './FBOAdminStyles';
+} from './CSRLSTStyles';
 
-class FBOAdmin extends Component {
+class CSRLST extends Component {
     render(){
         const props = {
-            page: 'FBO Admin',
+            page: 'CSR LST',
         }
         return (
             <>
                 <DashColumn>
-                    <h1>FBO ADMIN</h1>
+                    <h1>CST LST</h1>
                     <Flights myProps={props} />
                 </DashColumn>
                 <DashColumn>
@@ -28,4 +28,4 @@ class FBOAdmin extends Component {
     }
 }
 
-export default FBOAdmin;
+export default CSRLST;

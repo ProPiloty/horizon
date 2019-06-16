@@ -11,7 +11,6 @@ class Passenger extends Component {
     render(){
         return (
             <div>
-                <h1>Passenger Dashboard</h1>
                 <Flights role='passenger' />
             </div>
         )

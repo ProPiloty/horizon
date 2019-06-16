@@ -1,10 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+// FONTAWESOME IMPORTS
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+    faTint,
+    faToilet,
+    faGasPump,
+    faUtensils,
+    faHotel,
+    faCar
+} from '@fortawesome/free-solid-svg-icons';
+
 // REDUCER FUNCTIONS
 import {
     updateScheduledFlights,
-    updateViewAdd
+    updateViewView,
+    updateViewAdd,
+    updateViewEdit
 } from '../../../../../redux/reducers/flightReducer';
 
 // STYLED COMPONENTS
@@ -14,19 +27,32 @@ import {
     Title,
     BoxContainer,
     Box,
-    FlightHeader
+    BoxTitle,
+    BoxRow,
+    BoxColumn,
+    DetailType,
+    FlightDetails,
+    FlightInfo,
+    ServiceDetails,
+    BoldSpan
 } from './FlightFormStyles';
 
 class FlightForm extends Component {
-    constructor(){
-        super();
-        this.state = {
-            view: 2,
-        }
+
+    handleViewView = (flight) => {
+        this.props.updateViewView(flight);
     }
 
     handleViewAdd = () => {
         this.props.updateViewAdd();
+    }
+
+    handleAddFlight = () => {
+
+    }
+
+    handleViewEdit = (flight) => {
+        this.props.updateViewEdit(flight);
     }
 
     formatDate = (date) => {
@@ -37,6 +63,7 @@ class FlightForm extends Component {
 
     render(){
         const {add, view, edit} = this.props.flightReducer.views;
+        const {flightDetails} = this.props.flightReducer;
         const {
             aircraft_type,
             arr_date,
@@ -46,7 +73,7 @@ class FlightForm extends Component {
             dep_time,
             dep_airport,
             tail_number
-        } = this.props.flightReducer.flightDetails;
+        } = flightDetails;
 
         return(
             <Container>
@@ -63,7 +90,7 @@ class FlightForm extends Component {
                     {
                         add ?
                         <Box>
-                            <h1>New Flight</h1>
+                            <BoxTitle>New Flight</BoxTitle>
                             <input type='date' />
                             <input type='time' />
                             <input type='date' />
@@ -77,28 +104,73 @@ class FlightForm extends Component {
                     {
                         view ?
                         <Box>
-                            <h1>Flight Details</h1>
-                            <table>
-                                <tr>
-                                    <th>Flight</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                </tr>
-                                <tr>
-                                    <td>Departure:</td>
-                                    <td>{this.formatDate(dep_date)}</td>
-                                    <td>{dep_time}</td>
-                                </tr>
-                                <tr>
-                                    <td>Arrival:</td>
-                                    <td>{this.formatDate(arr_date)}</td>
-                                    <td>{arr_time}</td>
-                                </tr>
-                            </table>
-                            <h2>detail</h2>
-                            <h2>detail</h2>
-                            <h2>detail</h2>
-                            <h2>detail</h2>
+                            <BoxRow>
+                                <BoxTitle>Tail: {tail_number}</BoxTitle>
+                                <BoxTitle>Type: {aircraft_type}</BoxTitle>
+                            </BoxRow>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <DetailType>Departure:</DetailType>
+                                    <FlightDetails>Airport: <BoldSpan>{dep_airport}</BoldSpan></FlightDetails>
+                                    <FlightDetails>Date: <BoldSpan>{this.formatDate(dep_date)}</BoldSpan></FlightDetails>
+                                    <FlightDetails>Time: <BoldSpan>{dep_time}</BoldSpan></FlightDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <DetailType>Arrival:</DetailType>
+                                    <FlightDetails>Airport: <BoldSpan>{arr_airport}</BoldSpan></FlightDetails>
+                                    <FlightDetails>Date: <BoldSpan>{this.formatDate(arr_date)}</BoldSpan></FlightDetails>
+                                    <FlightDetails>Time: <BoldSpan>{arr_time}</BoldSpan></FlightDetails>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <DetailType>Services:</DetailType>
+                            </BoxRow>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faGasPump}/> Fuel</FlightInfo>
+                                    <ServiceDetails>Status: Requested</ServiceDetails>
+                                    <ServiceDetails>Gallons: 500</ServiceDetails>
+                                    <ServiceDetails>Type: JET-A</ServiceDetails>
+                                    <ServiceDetails>Prist: No</ServiceDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faToilet}/> Lavatory Dump/Fill</FlightInfo>
+                                    <ServiceDetails>Dump Status: Requested</ServiceDetails>
+                                    <ServiceDetails>Fill Gallons: Requested</ServiceDetails>
+                                    <ServiceDetails>Amount: 4 gal</ServiceDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faTint}/> Potable Water</FlightInfo>
+                                    <ServiceDetails>Status: Requested</ServiceDetails>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <DetailType>Flight Crew:</DetailType>
+                                    <FlightInfo><FontAwesomeIcon icon={faUtensils}/> Catering</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faHotel}/> Hotel</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faCar}/> Rental Car</FlightInfo>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <DetailType>Passengers:</DetailType>
+                                    <FlightInfo><FontAwesomeIcon icon={faUtensils}/> Catering</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faHotel}/> Hotel</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faCar}/> Rental Car</FlightInfo>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <DetailType>Comments and Notes:</DetailType>
+                                <BoxRow>
+                                    
+                                </BoxRow>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <button onClick={() => {this.handleViewEdit(flightDetails)}}>Edit Flight</button>
+                            </BoxRow>
                         </Box>
                         :
                         null
@@ -106,13 +178,82 @@ class FlightForm extends Component {
                     {
                         edit ?
                         <Box>
-                            <h1>Modify Flight</h1>
-                            <input />
-                            <input />
-                            <input />
-                            <input />
-                            <input />
-                            <input />
+                            <BoxRow>
+                                <BoxTitle>Tail: <input /></BoxTitle>
+                                <BoxTitle>Type: <input /></BoxTitle>
+                            </BoxRow>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <DetailType>Departure:</DetailType>
+                                    <FlightDetails>Airport: <input /></FlightDetails>
+                                    <FlightDetails>Date: <input /></FlightDetails>
+                                    <FlightDetails>Time: <input /></FlightDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <DetailType>Arrival:</DetailType>
+                                    <FlightDetails>Airport: <input /></FlightDetails>
+                                    <FlightDetails>Date: <input /></FlightDetails>
+                                    <FlightDetails>Time: <input /></FlightDetails>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <DetailType>Services:</DetailType>
+                            </BoxRow>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faGasPump}/> Fuel</FlightInfo>
+                                    <ServiceDetails>Status: <input /></ServiceDetails>
+                                    <ServiceDetails>Gallons: <input /></ServiceDetails>
+                                    <ServiceDetails>Type: <input /></ServiceDetails>
+                                    <ServiceDetails>Prist: <input /></ServiceDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faToilet}/> Lavatory Dump/Fill</FlightInfo>
+                                    <ServiceDetails>Dump Status: <input /></ServiceDetails>
+                                    <ServiceDetails>Fill Gallons: <input /></ServiceDetails>
+                                    <ServiceDetails>Amount: <input /></ServiceDetails>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <FlightInfo><FontAwesomeIcon icon={faTint}/> Potable Water</FlightInfo>
+                                    <ServiceDetails>Status: <input /></ServiceDetails>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <DetailType>Flight Crew:</DetailType>
+                                    <FlightInfo><FontAwesomeIcon icon={faUtensils}/> Catering</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faHotel}/> Hotel</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faCar}/> Rental Car</FlightInfo>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <DetailType>Passengers:</DetailType>
+                                    <FlightInfo><FontAwesomeIcon icon={faUtensils}/> Catering</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faHotel}/> Hotel</FlightInfo>
+                                    <FlightInfo><FontAwesomeIcon icon={faCar}/> Rental Car</FlightInfo>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <DetailType>Comments and Notes:</DetailType>
+                                <BoxColumn>
+                                    <h2>Category</h2>
+                                    <select>
+                                        <option value="volvo">Volvo</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="mercedes">Mercedes</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
+                                    <textarea />
+                                    <button>Submit</button>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
+                            <BoxRow>
+                                <button onClick={() => {}}>Submit Changes</button>
+                                <button onClick={() => {this.handleViewView(flightDetails)}}>Cancel</button>
+                            </BoxRow>
                         </Box>
                         :
                         null
@@ -129,5 +270,7 @@ function mapStateToProps(reduxState) {
 
 export default connect(mapStateToProps, {
     updateScheduledFlights,
-    updateViewAdd
+    updateViewView,
+    updateViewAdd,
+    updateViewEdit
 })(FlightForm);

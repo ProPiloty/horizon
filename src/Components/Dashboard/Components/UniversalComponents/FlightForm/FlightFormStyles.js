@@ -4,9 +4,6 @@ export const Container = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    width: 100%;
-    background: aquamarine;
 `
 
 export const TopBar = styled.div `
@@ -28,6 +25,8 @@ export const BoxContainer = styled.div `
     align-items: center;
     color: white;
     width: 95%;
+    max-height: 95%;
+    overflow-y: scroll;
 `
 
 export const Box = styled.div `
@@ -36,7 +35,47 @@ export const Box = styled.div `
     width: 100%;
 `
 
-export const FlightHeader = styled.h2 `
+export const BoxTitle = styled.h1 `
+    font-size: 20px;
     color: black;
+    font-weight: bold;
+`
+
+export const BoxRow = styled.div `
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 1vw;
+`
+
+export const BoxColumn = styled.div `
+    display: flex;
+    flex-direction: column;
+`
+
+export const DetailType = styled.h2 `
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+`
+
+export const FlightDetails = styled.h3 `
+    font-size: 16px;
+    color: black;
+    margin-top: .5vh;
+`
+
+export const FlightInfo = styled.h3 `
+    font-size: 16px;
+    color: black;
+    margin: 1vh 0;
+`
+
+export const ServiceDetails = styled.h3 `
+    font-size: 16px;
+    color: black;
+    margin-top: .5vh;
+`
+
+export const BoldSpan = styled.span `
     font-weight: bold;
 `
