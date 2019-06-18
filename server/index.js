@@ -19,6 +19,7 @@ const {
     FROMNUMBER
 } = process.env;
 app.use(express.json());
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(session({
     secret: SESSION_SECRET,
     saveUninitialized: false,
