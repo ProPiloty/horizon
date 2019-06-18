@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 // SIBLING COMPONENTS
 import FlightForm from '../UniversalComponents/FlightForm/FlightForm';
 import Flights from '../UniversalComponents/Flights/Flights';
+import Message from '../UniversalComponents/Message/Message';
 
 // STYLED COMPONENTS
 import {
@@ -22,6 +23,7 @@ class FBOAdmin extends Component {
                 </DashColumn>
                 <DashColumn>
                     <FlightForm />
+                    <Message />
                 </DashColumn>
             </>
         )

@@ -84,6 +84,7 @@ class Auth extends Component {
 
         axios.post('/auth/register', body)
             .then(res => {
+                this.props.updateUser(res.data);
                 this.props.history.push('/dashboard');
             })
             .catch(err => {

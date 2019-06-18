@@ -32,6 +32,7 @@ class ScheduledFlights extends Component {
         axios
             .get(`/api/flights`)
             .then((res) => {
+                console.log(res.data);
                 this.props.updateScheduledFlights(res.data.scheduledFlights);
                 this.props.updatePastFlights(res.data.pastFlights);
             })

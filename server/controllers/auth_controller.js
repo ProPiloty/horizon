@@ -13,17 +13,22 @@ module.exports = {
             firstname,
             lastname,
             email,
-            password: hash,
+            password: hash
+        });
+        db.auth.register_roles({
+            id: createdUser[0].id,
             fboadmin, 
             flmadmin, 
             student, 
             passenger
-        });
-        session.user = {
-            id: createdUser[0].id,
-            username: createdUser[0].firstname
-        };
-        res.status(200).send(session.user);
+        }).then(() => {
+            session.user = {
+                id: createdUser[0].id,
+                username: createdUser[0].firstname
+            };
+
+            res.status(200).send(session.user);
+        })
     },
     checkEmail: async (req, res) => {
         const {email} = req.body;

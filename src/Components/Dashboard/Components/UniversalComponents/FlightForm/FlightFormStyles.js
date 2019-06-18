@@ -4,6 +4,7 @@ export const Container = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 `
 
 export const TopBar = styled.div `
@@ -21,11 +22,11 @@ export const Title = styled.h1 `
 export const BoxContainer = styled.div `
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: white;
     width: 95%;
-    max-height: 95%;
+    min-height: 90vh;
     overflow-y: scroll;
 `
 
@@ -78,4 +79,20 @@ export const ServiceDetails = styled.h3 `
 
 export const BoldSpan = styled.span `
     font-weight: bold;
+`
+
+export const InputWrap = styled.div `
+
+`
+
+export const InputName = styled.h3 `
+
+`
+
+export const InputField = styled.input `
+    width: 100%;
+`
+
+export const DropInput = styled.select `
+    width: 100%;
 `
