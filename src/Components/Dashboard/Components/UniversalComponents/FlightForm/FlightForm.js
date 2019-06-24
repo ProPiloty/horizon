@@ -81,6 +81,9 @@ class FlightForm extends Component {
             }
         }
     }
+    componentDidMount(){
+        this.props.updateViewAdd();
+    }
 
     componentDidUpdate(previous){
         if (previous.flightReducer.flightDetails.id !== this.props.flightReducer.flightDetails.id) {
@@ -92,7 +95,6 @@ class FlightForm extends Component {
 
     handleViewView = (flight) => {
         this.props.updateViewView(flight);
-        // this.setState({flight})
     }
 
     handleViewAdd = () => {
@@ -133,19 +135,39 @@ class FlightForm extends Component {
         const {flightDetails} = this.state;
         axios.post('/api/addflight', {flightDetails})
             .then((res) => {
-                
+                return axios.get(`/api/flights`);
+            })
+            .then((res) => {
+                this.props.updateScheduledFlights(res.data.scheduledFlights);
+                this.handleViewAdd();
             })
             .catch((err) => {
-
+                console.log(err);
             });
+    }
+
+    handleUpdateFlight = () => {
+        const {flightDetails} = this.state;
+        axios.put('/api/updateflight', {flightDetails})
+            .then((res) => {
+                return axios.get(`/api/flights`);
+            })
+            .then((res) => {
+                this.props.updateScheduledFlights(res.data.scheduledFlights);
+                this.handleViewAdd();
+            })
+            .catch((err) => {
+                console.log(err);
+            });  
     }
 
     handleDeleteFlight = (id) => {
         axios.delete(`/api/deleteflight/${id}`)
-            .then((res) => {
+            .then(() => {
                 return axios.get('/api/flights');
             })
             .then((res) => {
+                console.log(res.data)
                 this.props.updateScheduledFlights(res.data.scheduledFlights);
                 this.props.updatePastFlights(res.data.pastFlights);
                 this.handleViewAdd();
@@ -174,23 +196,15 @@ class FlightForm extends Component {
         const {add, view, edit} = this.props.flightReducer.views;
         const {flightDetails} = this.props.flightReducer;
         const {
-            aircraft_id,
             aircraft_type,
             arr_airport,
             arr_date,
-            arr_location,
             arr_time,
-            base_location,
-            based_aircraft,
-            company,
-            complete,
             contact_name,
             contact_number,
             dep_airport,
             dep_date,
-            dep_location,
             dep_time,
-            flight_id,
             fuel_gal,
             fuel_prist,
             fuel_status,
@@ -199,9 +213,7 @@ class FlightForm extends Component {
             lav_dump_status,
             lav_fill_gal,
             lav_fill_status,
-            location_id,
             potable_status,
-            rental_fleet,
             tail_number,
         } = flightDetails;
 
@@ -223,6 +235,9 @@ class FlightForm extends Component {
                         add || edit ?
                         <Box>
                             <BoxRow>
+                                <DetailType>Flight Details:</DetailType>
+                            </BoxRow>
+                            <BoxRow>
                                 <InputWrap>
                                     <InputName>Tail:</InputName>
                                     <InputField name='tail_number' value={this.state.flightDetails.tail_number}onChange={(e) => this.handleInputChange(e)} />
@@ -231,6 +246,13 @@ class FlightForm extends Component {
                                     <InputName>Type:</InputName>
                                     <InputField name='aircraft_type' value={this.state.flightDetails.aircraft_type} onChange={(e) => this.handleInputChange(e)} />
                                 </InputWrap>
+                                <InputWrap>
+                                        <InputName>Complete:</InputName>
+                                        <DropInput name='complete' value={this.state.flightDetails.complete} onChange={(e) => this.handleInputChange(e)} >
+                                            <option value='false'>False</option>
+                                            <option value='true'>True</option>
+                                        </DropInput>
+                                    </InputWrap>
                             </BoxRow>   
                             <BoxRow>
                                 <BoxColumn>
@@ -338,6 +360,24 @@ class FlightForm extends Component {
                                 </BoxColumn>
                             </BoxRow>
                             <hr/>
+                            <BoxRow>
+                                <DetailType>Contact:</DetailType>
+                            </BoxRow>
+                            <BoxRow>
+                                <BoxColumn>
+                                    <InputWrap>
+                                        <InputName>Name:</InputName>
+                                        <InputField name='contact_name' value={this.state.flightDetails.contact_name} onChange={(e) => this.handleInputChange(e)} />
+                                    </InputWrap>
+                                </BoxColumn>
+                                <BoxColumn>
+                                    <InputWrap>
+                                        <InputName>Number:</InputName>
+                                        <InputField name='contact_number' value={this.state.flightDetails.contact_number} onChange={(e) => this.handleInputChange(e)} />
+                                    </InputWrap>
+                                </BoxColumn>
+                            </BoxRow>
+                            <hr/>
                             {/* <BoxRow>
                                 <BoxColumn>
                                     <DetailType>Flight Crew:</DetailType>
@@ -401,7 +441,7 @@ class FlightForm extends Component {
                                     <button onClick={() => {this.handleAddFlight(this.state.flightDetails)}}>Add Flight</button>
                                 :
                                     <>
-                                    <button onClick={() => {}}>Submit Changes</button>
+                                    <button onClick={() => {this.handleUpdateFlight(this.state.flightDetails)}}>Submit Changes</button>
                                     <button onClick={() => {this.handleDeleteFlight(id)}}>Delete Flight</button>
                                     <button onClick={() => {this.handleViewView(flightDetails)}}>Cancel</button>
                                     </>

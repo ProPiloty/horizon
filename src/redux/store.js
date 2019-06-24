@@ -1,5 +1,7 @@
 // PACKAGES
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import promiseMiddleware from 'redux-promise-middleware';
 
 // REDUCERS
@@ -12,5 +14,13 @@ const rootReducer = combineReducers({
     flightReducer
 })
 
+// FOR REDUX PERSIST
+const persistConfig = {
+    key: 'root',
+    storage
+}
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 // REDUX STORE EXPORT
-export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
+export const store = createStore(persistedReducer, applyMiddleware(promiseMiddleware));
+export const persistor = persistStore(store);

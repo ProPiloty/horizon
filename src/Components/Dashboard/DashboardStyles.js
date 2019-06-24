@@ -12,5 +12,5 @@ export const Main = styled.div `
     align-items: center;
     height: 100vh;
     width: 100%;
-    background: green;
+    background: #C3D7E9;
 `

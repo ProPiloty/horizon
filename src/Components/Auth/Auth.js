@@ -183,7 +183,7 @@ class Auth extends Component {
             default:
                 return (
                     <AuthForm onSubmit={this.checkUserEmail}>
-                        <AuthMessage>Hello there!</AuthMessage>
+                        <AuthMessage>Horizon Flight Managment</AuthMessage>
                         <AuthFormInputTitle>Please enter your email:</AuthFormInputTitle>
                         <AuthFormInput
                             field='email'

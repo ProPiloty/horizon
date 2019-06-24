@@ -4,40 +4,46 @@ export const Container = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    width: 100%;
-    background: aquamarine;
 `
 
 export const TopBar = styled.div `
     display: flex;
     justify-content: space-between;
     width: 95%;
-    margin: 1vh 0;
+    margin: 1vh 1vw;
 `
 
 export const Title = styled.h1 `
-    color: black;
+    color: #363635;
     font-size: 20px;
 `
 
 export const FlightList = styled.div `
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     overflow-y: scroll;
-    color: white;
-    width: 95%;
-`
-
-export const FlightBox = styled.div `
-    background: slategray;
-    margin-bottom: 1vh;
+    max-height: 95%;
     width: 100%;
 `
 
+export const FlightBox = styled.div `
+    background: #BAD1CD;
+    color: #363635;
+    margin-bottom: 1vh;
+    width: 100%;
+    border: 1px #363635 solid;
+`
+
 export const FlightHeader = styled.h2 `
-    color: black;
+    color: #363635;
     font-weight: bold;
+    margin: 1vh 1vw;
+`
+
+export const FlightRow = styled.div `
+    display: flex;
+    justify-content: space-between;
+    margin: 1vh 1vw;
 `

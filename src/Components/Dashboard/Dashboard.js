@@ -26,7 +26,6 @@ class UserDash extends Component {
     }
 
     render(){
-        console.log(this.props)
         return (
             <UserDashParent>
                 <DashboardNav></DashboardNav>

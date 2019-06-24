@@ -1,4 +1,4 @@
-INSERT INTO FLIGHTS (
+INSERT INTO flights (
     aircraft_id,
     arr_airport,
     arr_date,
@@ -24,4 +24,5 @@ VALUES (
     ${dep_date},
     ${dep_location},
     ${dep_time}
-);
+)
+RETURNING id;

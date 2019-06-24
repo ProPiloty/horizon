@@ -17,7 +17,8 @@ import {
     Title,
     FlightList,
     FlightBox,
-    FlightHeader
+    FlightHeader,
+    FlightRow
 } from './FlightsStyles';
 
 class ScheduledFlights extends Component {
@@ -32,7 +33,6 @@ class ScheduledFlights extends Component {
         axios
             .get(`/api/flights`)
             .then((res) => {
-                console.log(res.data);
                 this.props.updateScheduledFlights(res.data.scheduledFlights);
                 this.props.updatePastFlights(res.data.pastFlights);
             })
@@ -82,10 +82,18 @@ class ScheduledFlights extends Component {
             return (
                 <FlightBox key={ind}>
                     <FlightHeader>{tail_number} - {aircraft_type}</FlightHeader>
-                    <h2>DEP: {dep_airport} @ {dep_time}, ARR: {arr_airport} @ {arr_time}</h2>
-                    <h2>Departure Date: {this.formatDate(dep_date)}, Arrival Date: {this.formatDate(arr_date)}</h2>
-                    <button onClick={(e) => (this.handleViewFlight(flight))}>View Details</button>
-                    <button onClick={(e) => (this.handleEditFlight(flight))}>Edit Flight</button>
+                    <FlightRow>
+                        <h2>DEP: {dep_airport} @ {dep_time}</h2>
+                        <h2>ARR: {arr_airport} @ {arr_time}</h2>
+                    </FlightRow>
+                    <FlightRow>
+                        <h2>Departure Date: {this.formatDate(dep_date)}</h2>
+                        <h2>Arrival Date: {this.formatDate(arr_date)}</h2>
+                    </FlightRow>
+                    <FlightRow>
+                        <button onClick={(e) => (this.handleViewFlight(flight))}>View Details</button>
+                        <button onClick={(e) => (this.handleEditFlight(flight))}>Edit Flight</button>
+                    </FlightRow>
                 </FlightBox>
             )
         })

@@ -24,16 +24,17 @@ export const BoxContainer = styled.div `
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    color: white;
+    color: black;
     width: 95%;
-    min-height: 90vh;
+    height: 80vh;
     overflow-y: scroll;
 `
 
 export const Box = styled.div `
-    background: slategray;
+    background: #BAD1CD;
     margin-bottom: 1vh;
     width: 100%;
+    border: 1px #363635 solid;
 `
 
 export const BoxTitle = styled.h1 `

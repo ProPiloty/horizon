@@ -11,6 +11,7 @@ const initialState = {
 }
 
 // ACTION TYPES
+const CLEAR_FLIGHTS = 'CLEAR_FLIGHTS';
 const UPDATE_SCHEDULED_FLIGHTS = 'UPDATE_SCHEDULED_FLIGHTS';
 const UPDATE_PAST_FLIGHTS = 'UPDATE_PAST_FLIGHTS';
 const UPDATE_VIEW_ADD = 'UPDATE_VIEW_ADD';
@@ -18,6 +19,13 @@ const UPDATE_VIEW_VIEW = 'UPDATE_VIEW_VIEW';
 const UPDATE_VIEW_EDIT = 'UPDATE_VIEW_EDIT';
 
 // ACTION EXPORTS
+export function clearFlights() {
+    return {
+        type: CLEAR_FLIGHTS,
+        payload: []
+    }
+}
+
 export function updateScheduledFlights(flights){
     return {
         type: UPDATE_SCHEDULED_FLIGHTS,
@@ -56,6 +64,8 @@ export function updateViewEdit(flight){
 // FLIGHT REDUCER
 function reducer(state = initialState, action) {
     switch(action.type){
+        case CLEAR_FLIGHTS:
+            return {...state, scheduledFlights: action.payload, pastFlights: action.payload}
         case UPDATE_SCHEDULED_FLIGHTS:
             return {...state, scheduledFlights: action.payload};
         case UPDATE_PAST_FLIGHTS:

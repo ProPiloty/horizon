@@ -1,4 +1,4 @@
-SELECT fl.*, airc.*, us.location_id, flsv.*
+SELECT fl.*, airc.aircraft_type, airc.tail_number, us.location_id, flsv.fuel_status, flsv.fuel_gal, flsv.fuel_type, flsv.fuel_prist, flsv.lav_dump_status, flsv.lav_fill_status, flsv.lav_fill_gal, flsv.potable_status
 FROM users us
 JOIN locations loc
 ON loc.id = us.location_id
