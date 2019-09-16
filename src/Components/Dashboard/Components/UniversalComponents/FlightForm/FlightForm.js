@@ -217,8 +217,6 @@ class FlightForm extends Component {
             tail_number,
         } = flightDetails;
 
-
-
         return(
             <Container>
                 <TopBar>
